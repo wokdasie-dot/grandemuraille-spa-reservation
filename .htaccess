@@ -4,10 +4,16 @@ ServerSignature Off
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
+
+  # Forcer HTTPS (méthode documentée par OVH : port 80), sans boucle derrière un proxy
+  RewriteCond %{SERVER_PORT} 80
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
   RewriteRule ^admin$ admin.html [L]
   RewriteRule ^(includes|data|sql|tools)/ - [F]
   RewriteRule (^|/)\.git - [F]
-  RewriteRule ^LISEZMOI\.txt$ - [F]
+  RewriteRule ^(LISEZMOI\.txt|README\.md)$ - [F]
 </IfModule>
 
 <FilesMatch "^(config\.php|config\.php\.tmp|config\.example\.php|\.gitignore|\.htaccess)$">
