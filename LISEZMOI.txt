@@ -1,0 +1,26 @@
+Déploiement — La Grande Muraille de Chine (Spa)
+Dossier d'hébergement : nouveau
+Adresse prévue : https://nouveau.grandemuraillespa.be/
+
+Ce dossier contient exactement les fichiers à placer dans le répertoire
+« nouveau » du compte OVH (racine web du sous-domaine), pour Apache et PHP 8.4.
+
+1. Créez une base MySQL neuve dans l'espace client OVH (recommandé).
+2. Importez sql/schema.sql dans cette base (phpMyAdmin ou ligne de commande).
+3. Éditez config.php :
+   - host, name, user et pass de la base (fournis par OVH) ;
+   - admin_password_hash : générez-le avec
+     php tools/hash-password.php
+     (vous pouvez lancer cette commande en local, pas forcément sur l'hébergement) ;
+   - ip_hash_secret : une longue chaîne aléatoire.
+   L'e-mail de notification (jinzhu1031@gmail.com), l'identité légale,
+   l'inventaire des tables (estimation de 72 places) et l'adresse d'expédition
+   noreply@grandemuraillespa.be sont déjà renseignés.
+4. Déposez tout le contenu de ce dossier dans « nouveau » par FTP.
+5. Vérifiez https://nouveau.grandemuraillespa.be/ et
+   https://nouveau.grandemuraillespa.be/admin
+
+config.php, includes/, data/, sql/ et tools/ sont protégés par .htaccess.
+Ne remplacez pas encore le site actuel de grandemuraillespa.be tant que
+le restaurant n'a pas validé l'inventaire des tables, les horaires et
+une réservation d'essai.

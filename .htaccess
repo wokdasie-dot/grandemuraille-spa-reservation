@@ -1,0 +1,17 @@
+Options -Indexes
+ServerSignature Off
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+  RewriteRule ^admin$ admin.html [L]
+  RewriteRule ^(includes|data|sql|tools)/ - [F]
+  RewriteRule (^|/)\.git - [F]
+  RewriteRule ^LISEZMOI\.txt$ - [F]
+</IfModule>
+
+<FilesMatch "^(config\.php|config\.php\.tmp|config\.example\.php|\.gitignore|\.htaccess)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>
